@@ -1,4 +1,6 @@
 import "tailwindcss";
+import Social from "../../components/Social";
+import { FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
 
 
 
@@ -17,8 +19,16 @@ function Home() {
           </a>
         </section>
 
-        <footer className="flex justify-center gap-2 my-4">
-
+        <footer className="flex justify-center gap-5 my-4 ">
+          <Social url="https://facebook.com/">
+            <FaFacebook size={32} color="#3b5998" />
+          </Social>
+          <Social url="https://www.youtube.com">
+            <FaYoutube size={32} color="#3b5998" />
+          </Social>
+          <Social url="https://www.linkedin.com/in/pedro-cafe/">
+            <FaLinkedin size={32} color="#3b5998" />
+          </Social>
         </footer>
       </main>
     </div>
