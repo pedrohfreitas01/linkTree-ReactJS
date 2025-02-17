@@ -1,7 +1,12 @@
+import "tailwindcss";
+
+
 
 function Home() {
   return (
-    <div>Home</div>
+    <h1 className="text-3xl font-bold underline bgf">
+      Hello world!
+    </h1>
   )
 }
 
