@@ -1,7 +1,8 @@
 @import "tailwindcss";
 @import "tailwindcss/utilities";
 
-body{
-    min-height: 100vh;
-    background: linear-gradient(#232630, #050507);
+body {
+  min-height: 100vh;
+  /* background: linear-gradient(#232630, #050507); */
+  background: linear-gradient(to bottom, #4b2e2e, #c4a484);
 }
