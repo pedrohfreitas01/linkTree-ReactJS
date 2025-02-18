@@ -1,19 +1,33 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { VscCoffee } from "react-icons/vsc";
 import { Input } from "../../components/Input";
 import { FormEvent, useState } from "react";
 
-import { Auth } from "firebase/auth";
-
+import { auth } from "../../services/firebaseConnection";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-
+  const navigate = useNavigate()
 
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
+
+
+    if (email === '' || password === '') {
+      alert('Field the form !!!')
+      return
+    }
+
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        navigate("/admin", { replace: true })
+        console.log("logado");
+      })
+
 
     console.log({
       email: email,
