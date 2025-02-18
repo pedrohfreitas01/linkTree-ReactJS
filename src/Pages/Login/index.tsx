@@ -3,13 +3,16 @@ import { VscCoffee } from "react-icons/vsc";
 import { Input } from "../../components/Input";
 import { FormEvent, useState } from "react";
 
+import { Auth } from "firebase/auth";
+
 
 function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
 
-  function handleSubmit(e: FormEvent){
+
+  function handleSubmit(e: FormEvent) {
     e.preventDefault()
 
     console.log({
@@ -29,8 +32,11 @@ function Login() {
         </h1>
       </Link>
 
-      <form  onSubmit={handleSubmit} className="w-full max-w-xl flex flex-col px-2" action="">
-        <Input placeholder="type your email" type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+      <form onSubmit={handleSubmit} className="w-full max-w-xl flex flex-col px-2" action="">
+        <Input placeholder="type your email" type="email" value={email} onChange={(e) => setEmail(e.target.value)
+
+
+        }
         ></Input>
         <Input placeholder="*********" type="password" value={password} onChange={(e) => setPassword(e.target.value)}
         ></Input>
