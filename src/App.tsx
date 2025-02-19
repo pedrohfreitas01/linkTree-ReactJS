@@ -5,6 +5,10 @@ import Home from './Pages/Home'
 import Login from './Pages/Login'
 import Socials from './Pages/Socials'
 import Admin from './Pages/admin'
+import { PrivateRoute } from './routes/Private'
+
+
+
 
 const router = createBrowserRouter([
   {
@@ -21,7 +25,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <Admin />
+    element: <PrivateRoute><Admin /></PrivateRoute>
   }
 ])
 
