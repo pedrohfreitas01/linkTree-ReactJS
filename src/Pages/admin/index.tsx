@@ -1,7 +1,17 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { FiTrash } from "react-icons/fi";
+import { db } from "../../services/firebaseConnection";
+import {
+  addDoc, //gen a random id
+  collection, //
+  deleteDoc,
+  doc,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 
 function Admin() {
   const [nameInput, setNameInput] = useState("");
@@ -9,11 +19,38 @@ function Admin() {
   const [textColorInput, setTextColorInput] = useState("#f1f1f1");
   const [backgroundColorInput, setBackgroundColorInput] = useState("#121212");
 
+  function handleRegister(e: FormEvent) {
+    e.preventDefault();
+
+    if (nameInput === "" || urlInput === "") {
+      alert("All fields must be filled out. ");
+    }
+
+    addDoc(collection(db, "links"), {
+      name: nameInput,
+      url: urlInput,
+      bg: backgroundColorInput,
+      color: textColorInput,
+      created: new Date(),
+    }).then(() => {
+      setNameInput("")
+      setUrlInput("")
+      console.log("success");
+    })
+      .catch((error) => {
+        console.log("Error to register in database" + error);
+      });
+  }
+
   return (
     <div className="flex items-center flex-col min-h-screen pb-7 px-2">
       <Header />
 
-      <form action="" className="flex flex-col mt-9 mb-3 w-full max-w-xl ">
+      <form
+        action=""
+        className="flex flex-col mt-9 mb-3 w-full max-w-xl "
+        onSubmit={handleRegister}
+      >
         <label htmlFor="" className="text-amber-50 font-medium mt-2 mb-2">
           Link name
         </label>
