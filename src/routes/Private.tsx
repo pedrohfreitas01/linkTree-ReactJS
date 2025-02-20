@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../services/firebaseConnection";
-import { ReactNode, use, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 
