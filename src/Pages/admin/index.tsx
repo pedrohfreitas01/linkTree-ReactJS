@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
+import { FiTrash } from "react-icons/fi";
 
 function Admin() {
   const [nameInput, setNameInput] = useState("");
@@ -55,22 +56,43 @@ function Admin() {
           </div>
         </section>
 
-        <div className="flex items-center justify-start flex-col mb-7 p-1 border-gray-100/25 border rounded-md">
-          <label htmlFor="" className="text-amber-50 font-medium mt-2 mb-3">
-            Preview here
-          </label>
-          <article
-            className="w-11/12 max-w-lg flex flex-col items-center justify-between bg-zinc-200 rounded-2xl px-1 py-3"
-            style={{
-              marginBottom: 8,
-              marginTop: 8,
-              backgroundColor: backgroundColorInput, color: textColorInput
-            }}
-          >
-            <p className="font-medium">Youtube Chanelaa</p>
-          </article>
-        </div>
+        {nameInput !== "" && (
+          <div className="flex items-center justify-start flex-col mb-7 p-1 border-gray-100/25 border rounded-md">
+            <label htmlFor="" className="text-amber-50 font-medium mt-2 mb-3">
+              Preview here
+            </label>
+            <article
+              className="w-11/12 max-w-lg flex flex-col items-center justify-between bg-zinc-200 rounded-2xl px-1 py-3"
+              style={{
+                marginBottom: 8,
+                marginTop: 8,
+                backgroundColor: backgroundColorInput,
+                color: textColorInput,
+              }}
+            >
+              <p className="font-medium">{nameInput}</p>
+            </article>
+          </div>
+        )}
+
+        <button
+          type="submit"
+          className="bg-blue-600 h-9 rounded-md text-amber-50 font-medium gap-5 flex items-center justify-center"
+        >
+          Register
+        </button>
       </form>
+      <h2 className="font-bold text-white mb-4 text-2xl">My links</h2>
+
+      <article
+        className="flex items-center justify-between w-6/12 max-w-xl rounded py-3 px-2 mb-2 select-none"
+        style={{ backgroundColor: "#302020", color: "000" }}
+      >
+        <p>Chanel yt</p>
+        <button className="border border-dashed py-1 px-2 cursor-pointer">
+          <FiTrash size={18} color="#fff" />
+        </button>
+      </article>
     </div>
   );
 }
