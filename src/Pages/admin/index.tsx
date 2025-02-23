@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { FiTrash } from "react-icons/fi";
@@ -7,17 +7,52 @@ import {
   addDoc, //gen a random id
   collection, //
   deleteDoc,
-  doc,
+  doc,  //acessar um item especifico do banco
   onSnapshot,
   orderBy,
   query,
 } from "firebase/firestore";
+
+interface LinkProps {
+  id: string;
+  name: string;
+  url: string;
+  bg: string;
+  color: string;
+}
 
 function Admin() {
   const [nameInput, setNameInput] = useState("");
   const [urlInput, setUrlInput] = useState("");
   const [textColorInput, setTextColorInput] = useState("#f1f1f1");
   const [backgroundColorInput, setBackgroundColorInput] = useState("#121212");
+
+  const [links, setLinks] = useState<LinkProps[]>([]);
+
+  useEffect(() => {
+    const linksRef = collection(db, "links");
+    const queryRef = query(linksRef, orderBy("created", "asc"));
+
+    const unsub = onSnapshot(queryRef, (snapshot) => {
+      let lista = [] as LinkProps[];
+
+      snapshot.forEach((doc) => {
+        lista.push({
+          id: doc.id,
+          name: doc.data().name,
+          url: doc.data().url,
+          bg: doc.data().bg,
+          color: doc.data().color,
+        });
+      });
+
+      setLinks(lista);
+    });
+
+    return () => {
+      unsub();
+    };
+  });
 
   function handleRegister(e: FormEvent) {
     e.preventDefault();
@@ -32,15 +67,23 @@ function Admin() {
       bg: backgroundColorInput,
       color: textColorInput,
       created: new Date(),
-    }).then(() => {
-      setNameInput("")
-      setUrlInput("")
-      console.log("success");
     })
+      .then(() => {
+        setNameInput("");
+        setUrlInput("");
+        console.log("success");
+      })
       .catch((error) => {
         console.log("Error to register in database" + error);
       });
   }
+
+  async function HandleDeleteLink(id: string) {
+    const docRef = doc(db, "links", id);
+    await deleteDoc(docRef);
+    console.log(id);
+  }
+
 
   return (
     <div className="flex items-center flex-col min-h-screen pb-7 px-2">
@@ -121,15 +164,21 @@ function Admin() {
       </form>
       <h2 className="font-bold text-white mb-4 text-2xl">My links</h2>
 
-      <article
-        className="flex items-center justify-between w-6/12 max-w-xl rounded py-3 px-2 mb-2 select-none"
-        style={{ backgroundColor: "#302020", color: "000" }}
-      >
-        <p>Chanel yt</p>
-        <button className="border border-dashed py-1 px-2 cursor-pointer">
-          <FiTrash size={18} color="#fff" />
-        </button>
-      </article>
+      {links.map((link) => (
+        <article
+          key={link.id}
+          className="flex items-center justify-between w-6/12 max-w-xl rounded py-3 px-2 mb-2 select-none"
+          style={{ backgroundColor: link.bg, color: link.color }}
+        >
+          <p>{link.name}</p>
+          <button
+            className="border border-dashed py-1 px-2 cursor-pointer"
+            onClick={() => HandleDeleteLink(link.id)}
+          >
+            <FiTrash size={18} color="#fff" />
+          </button>
+        </article>
+      ))}
     </div>
   );
 }
