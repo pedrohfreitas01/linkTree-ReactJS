@@ -1,28 +1,41 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { db } from "../../services/firebaseConnection";
-import { addDoc, doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export default function Social() {
   const [facebook, setFacebook] = useState("");
   const [youtube, setYoutube] = useState("");
   const [instagram, setInstagram] = useState("");
 
+  useEffect(() => {
+    function loadLinks() {
+      const docRef = doc(db, "social", "links");
+      getDoc(docRef).then((snapshot) => {
+        if (snapshot.data() !== undefined) {
+          setFacebook(snapshot.data()?.facebook);
+          setInstagram(snapshot.data()?.instagram);
+          setYoutube(snapshot.data()?.youtube);
+        }
+      });
+    }
+
+    loadLinks()
+  }, []);
+
   function handleRegister(e: FormEvent) {
-    e.preventDefault()
+    e.preventDefault();
 
     setDoc(doc(db, "social", "link"), {
       facebook: facebook,
       instagram: instagram,
-      youtube: youtube
+      youtube: youtube,
     })
-      .then(() => {
-      
-      })
+      .then(() => {})
       .catch((error) => {
-      console.log("Error ao salvar ", error);
-    })
+        console.log("Error to save ", error);
+      });
   }
 
   return (
@@ -32,7 +45,11 @@ export default function Social() {
       <h1 className="text-2xl text-white font-bold mt-8 mb-4">
         My social network
       </h1>
-      <form action="" className="flex flex-col max-w-xl w-full" onSubmit={handleRegister}>
+      <form
+        action=""
+        className="flex flex-col max-w-xl w-full"
+        onSubmit={handleRegister}
+      >
         <label htmlFor="" className="text-white font-medium mt-2 mb-2">
           Link do facebook
         </label>
