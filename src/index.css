@@ -4,6 +4,6 @@
 body {
   min-height: 100vh;
   /* background: linear-gradient(#232630, #050507); */
-  background: linear-gradient(to bottom, #4b2e2e, #c4a484);
+  background: linear-gradient(to bottom, #0f044e, rgba(31, 11, 214, 0.2) );
   /* font-family: 'Courier New', Courier, monospace; */
 }
