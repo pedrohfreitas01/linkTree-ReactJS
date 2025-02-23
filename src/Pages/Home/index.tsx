@@ -1,6 +1,6 @@
 import "tailwindcss";
 import Social from "../../components/Social";
-import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { db } from "../../services/firebaseConnection";
 import {
   getDocs,
