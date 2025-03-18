@@ -1,50 +1,66 @@
-# React + TypeScript + Vite
+# Linkoofee - Linktree Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um projeto baseado na ideia do Linktree, desenvolvido com React.js, Tailwind CSS e Firebase. O sistema inclui roteamento de páginas, banco de dados, sistema de login e um painel de administrador.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Tecnologias Utilizadas
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+- React.js - Biblioteca para construção da interface
+- Tailwind CSS - Estilização rápida e responsiva
+- Firebase - Autenticação, banco de dados e hospedagem
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Funcionalidades
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- Cadastro e Login
+
+    - Autenticação via Firebase Authentication
+
+    - Login com email/senha
+
+- Gerenciamento de Links
+
+    - Adicionar, editar e remover links
+
+    - Personalização do perfil
+
+- Painel de Admin
+
+    - Controle total sobre os links cadastrados
+
+    - Configuração do tema e design
+
+### InstalaçãO
+ 1. Clone o repositório:
+
+        
+        git clone https://github.com/seuusuario/seurepositorio.git
+
+
+2. Instale as dependências:
+
+        
+        cd seurepositorio
+        npm install
+
+3. Configure o Firebase:
+
+    - Crie um projeto no Firebase
+
+    - Ative Authentication e Firestore
+
+    - Adicione suas credenciais no arquivo .env.local:
+
+        ```
+        VITE_FIREBASE_API_KEY=XXXXXXX
+        VITE_FIREBASE_AUTH_DOMAIN=XXXXXXX
+        VITE_FIREBASE_PROJECT_ID=XXXXXXX
+        VITE_FIREBASE_STORAGE_BUCKET=XXXXXXX
+        VITE_FIREBASE_MESSAGING_SENDER_ID=XXXXXXX
+        VITE_FIREBASE_APP_ID=XXXXXXX
+        ```
+4. Inicie o projeto:
+ npm run dev
