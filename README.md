@@ -37,13 +37,13 @@ Este é um projeto baseado na ideia do Linktree, desenvolvido com React.js, Tail
  1. Clone o repositório:
 
         
-        git clone https://github.com/seuusuario/seurepositorio.git
+        git clone https://github.com/pedrohfreitas01/linkTree-ReactJS
 
 
 2. Instale as dependências:
 
         
-        cd seurepositorio
+        cd linktree
         npm install
 
 3. Configure o Firebase:
